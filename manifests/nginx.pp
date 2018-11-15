@@ -1,7 +1,12 @@
-class profile::nginx {
+class profile::nginx (
+  Array $vhosts,
+) {
   include ::nginx
   
-  ::nginx::vhost { $facts['fqdn']:
-    
+  $vhosts.each |$vhosts| {
+    ::nginx::vhost { $facts['fqdn']:
+      port           => $vhost['port'],
+      server_aliases => $vhost['server_aliases'], 
+    }
   }
 }
