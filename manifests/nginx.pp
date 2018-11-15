@@ -3,7 +3,7 @@ class profile::nginx (
 ) {
   include ::nginx
   
-  $vhosts.each |$vhosts| {
+  $vhosts.each |$vhost| {
     ::nginx::vhost { $facts['fqdn']:
       port           => $vhost['port'],
       server_aliases => $vhost['server_aliases'], 
